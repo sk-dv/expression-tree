@@ -32,26 +32,26 @@
 .left-branch {
   position: absolute;
   background-color: #676f9d;
-  width: 60px;
+  width: 75px;
   height: 20px;
-  bottom: -5px;
-  left: -25px;
+  bottom: -20px;
+  left: -50px;
   transform: rotate(-45deg);
 }
 
 .right-branch {
   position: absolute;
   background-color: #676f9d;
-  width: 60px;
+  width: 75px;
   height: 20px;
-  bottom: -5px;
-  right: -25px;
+  bottom: -20px;
+  right: -50px;
   transform: rotate(45deg);
 }
 
 .sub-left-node-wrapper {
   position: absolute;
-  left: -90px;
+  left: -110px;
   bottom: -60px;
   font-family: Raleway;
   background-color: #676f9d;
@@ -67,7 +67,7 @@
 
 .sub-right-node-wrapper {
   position: absolute;
-  right: -90px;
+  right: -110px;
   bottom: -60px;
   font-family: Raleway;
   background-color: #676f9d;

@@ -1,10 +1,13 @@
 export class TreeNode<T> {
-    left?: TreeNode<T>;
-    right?: TreeNode<T>;
+    public left: TreeNode<T> | undefined;
+    public right: TreeNode<T> | undefined;
 
-    constructor(public value: T) { console.log(value) }
+    private constructor(public value: T, left?: TreeNode<T>, right?: TreeNode<T>) { 
+        this.left = left
+        this.right = right
+    }
 
-    public copyWith<T>(modifyObject: { [P in keyof TreeNode<T>]?: TreeNode<T>[P] }): TreeNode<T> {
-        return Object.assign(Object.create(TreeNode.prototype), { ...this, ...modifyObject });
+    static definedNode = <T>(value: T, left?: TreeNode<T>, right?: TreeNode<T>) => {
+        return JSON.parse(JSON.stringify(new TreeNode(value, left, right)))
     }
 }

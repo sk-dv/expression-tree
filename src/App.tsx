@@ -24,28 +24,24 @@ const NodePlot = ({ node, className }: any) => {
   );
 };
 
-const node = new TreeNode<number>(1);
-node.left = new TreeNode<number>(2);
-node.right = new TreeNode<number>(3);
-node.left.left = new TreeNode<number>(4);
-node.left.right = new TreeNode<number>(5);
-
-console.log(inOrderWalk<number>(node))
+const node = TreeNode.definedNode<number>(1);
+node.left = TreeNode.definedNode<number>(2);
+node.right = TreeNode.definedNode<number>(3);
+node.left.left = TreeNode.definedNode<number>(4);
+node.left.right = TreeNode.definedNode<number>(5);
 
 const postfix = infixToPostfix('(5+2)*(3-1)')
 
 const tree = postfixToTree(postfix)
 
 if (tree != undefined) {
-  console.log(inOrderWalk(postfixToTree(postfix)!))
+  console.log(inOrderWalk(tree))
 }
-
-
 
 const App = () => {
   return (
     <div className="app-wrapper">
-      <NodePlot node={node} className='node-wrapper' />
+      <NodePlot node={tree} className='node-wrapper' />
     </div>
   );
 };

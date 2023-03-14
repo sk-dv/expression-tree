@@ -1,12 +1,16 @@
 import { TreeNode } from "./models/tree-node";
 
+/**
+ * @param tree node 
+ * @returns generic sequence building by an in order walk
+ */
 export const inOrderWalk = <T>(node: TreeNode<T>): T[] => {
     const sequence: T[] = []
 
     const inOrder = (current: TreeNode<T> | undefined) => {
         if (current == undefined) return;
         inOrder(current!.left)
-        sequence.push(current!.value)
+        sequence.push(current.value)
         inOrder(current!.right)
     };
 
@@ -15,7 +19,6 @@ export const inOrderWalk = <T>(node: TreeNode<T>): T[] => {
 }
 
 /**
- * 
  * @param operator character 
  * @returns precedence level
  */
@@ -27,7 +30,6 @@ const precedence = (char: string): number => {
 }
 
 /**
- * 
  * @param infix string 
  * @returns postfix string
  */
@@ -64,24 +66,24 @@ export const infixToPostfix = (expressions: string): string => {
     return postfix
 }
 
+/**
+ * @param postfix string
+ * @returns expression tree
+ */
 export const postfixToTree = (postfix: string): TreeNode<string> | undefined => {
-    let nodes: TreeNode<string>[] = []
+    const nodes: TreeNode<string>[] = []
 
-    for (let idx = 0; idx < postfix.length; idx++) {
-        if (postfix[idx].match(RegExp('^[a-z0-9]'))?.length == 1) {
-            nodes.push(new TreeNode<string>(postfix[idx]))
-            continue
+    for (let char of postfix) {
+        if (char.match(RegExp('^[a-z0-9]'))?.length == 1)
+            nodes.push(TreeNode.definedNode<string>(char))
+        else {
+            let node = TreeNode.definedNode<string>(char)
+            node.right = nodes.pop()
+            node.left = nodes.pop()
+            nodes.push(node)
         }
-
-        const node = new TreeNode<string>(postfix[idx])
-        const right = nodes.pop()!.value
-        const left = nodes.pop()!.value
-        node.right = new TreeNode<string>(right)
-        node.left = new TreeNode<string>(left)
-        nodes.push(node)
-
     }
 
-    const root = nodes.pop()
+    let root = nodes.pop()
     return root
 }
