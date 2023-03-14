@@ -5,11 +5,86 @@
   height: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  padding-top: 15em;
 }
 
 .app-title {
   font-family: Raleway;
   letter-spacing: 5px;
   font-size: 50px;
+}
+
+.node-wrapper {
+  display: flex;
+  position: relative;
+  font-family: Raleway;
+  background-color: #676f9d;
+  font-size: 45px;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  z-index: 1;
+}
+
+.left-branch {
+  position: absolute;
+  background-color: #676f9d;
+  width: 60px;
+  height: 20px;
+  bottom: -5px;
+  left: -25px;
+  transform: rotate(-45deg);
+}
+
+.right-branch {
+  position: absolute;
+  background-color: #676f9d;
+  width: 60px;
+  height: 20px;
+  bottom: -5px;
+  right: -25px;
+  transform: rotate(45deg);
+}
+
+.sub-left-node-wrapper {
+  position: absolute;
+  left: -90px;
+  bottom: -60px;
+  font-family: Raleway;
+  background-color: #676f9d;
+  font-size: 45px;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  transform: rotate(45deg);
+}
+
+.sub-right-node-wrapper {
+  position: absolute;
+  right: -90px;
+  bottom: -60px;
+  font-family: Raleway;
+  background-color: #676f9d;
+  font-size: 45px;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  transform: rotate(-45deg);
+}
+
+.left-branch-wrapper {
+  position: relative
+}
+
+.right-branch-wrapper {
+  position: relative;
 }
