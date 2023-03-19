@@ -70,7 +70,7 @@ export const infixToPostfix = (expressions: string): string => {
  * @param postfix string
  * @returns expression tree
  */
-export const postfixToTree = (postfix: string): TreeNode<string> | undefined => {
+export const postfixToTree = (postfix: string): { root: TreeNode<string> | undefined, height: number } => {
     const nodes: TreeNode<string>[] = []
 
     for (let char of postfix) {
@@ -85,5 +85,5 @@ export const postfixToTree = (postfix: string): TreeNode<string> | undefined => 
     }
 
     let root = nodes.pop()
-    return root
+    return { root, height: parseInt(Math.log2(postfix.length).toString()) + 1 }
 }

@@ -19,9 +19,9 @@
   position: relative;
   font-family: Raleway;
   background-color: #676f9d;
-  font-size: 45px;
-  width: 100px;
-  height: 100px;
+  font-size: 25px;
+  width: 60px;
+  height: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -29,56 +29,36 @@
   z-index: 1;
 }
 
-.left-branch {
-  position: absolute;
-  background-color: #676f9d;
-  width: 75px;
-  height: 20px;
-  bottom: -20px;
-  left: -50px;
-  transform: rotate(-45deg);
-}
-
-.right-branch {
-  position: absolute;
-  background-color: #676f9d;
-  width: 75px;
-  height: 20px;
-  bottom: -20px;
-  right: -50px;
-  transform: rotate(45deg);
-}
-
 .sub-left-node-wrapper {
   position: absolute;
-  left: -110px;
-  bottom: -60px;
+  left: -60px;
+  bottom: -50px;
   font-family: Raleway;
   background-color: #676f9d;
-  font-size: 45px;
-  width: 100px;
-  height: 100px;
+  font-size: 25px;
+  width: 60px;
+  height: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 15px;
-  transform: rotate(45deg);
+  transform: rotate(20deg);
 }
 
 .sub-right-node-wrapper {
   position: absolute;
-  right: -110px;
-  bottom: -60px;
+  right: -60px;
+  bottom: -50px;
   font-family: Raleway;
   background-color: #676f9d;
-  font-size: 45px;
-  width: 100px;
-  height: 100px;
+  font-size: 25px;
+  width: 60px;
+  height: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 15px;
-  transform: rotate(-45deg);
+  transform: rotate(-20deg);
 }
 
 .left-branch-wrapper {
