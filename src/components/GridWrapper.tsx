@@ -4,21 +4,20 @@ import { Canvas } from "@react-three/fiber";
 import { AlgorithmsController } from "../data/algorithms-controller";
 import { TreeNode } from "../models/tree-node";
 import { Vector2 } from "three";
+import { useState } from "react";
 
 const size = 2;
-const node = AlgorithmsController.gridGeneration();
 
 const FixedWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 100%;
   height: 100%;
 `;
 
 const Center = styled.div`
-  width: 80%;
+  width: 100%;
   height: 80%;
+  bottom: 0;
+  position: fixed;
 `;
 
 const BoxNode = (node: TreeNode<string>) => {
@@ -46,15 +45,15 @@ const BoxNode = (node: TreeNode<string>) => {
         </Html>
       </RoundedBox>
       {node.right && (
-          <Line
-            points={[
-              new Vector2(node.position!.x, node.position!.y),
-              new Vector2(node.right.position!.x, node.right.position!.y),
-            ]}
-            color="red"
-            lineWidth={3}
-          />
-        )}
+        <Line
+          points={[
+            new Vector2(node.position!.x, node.position!.y),
+            new Vector2(node.right.position!.x, node.right.position!.y),
+          ]}
+          color="red"
+          lineWidth={3}
+        />
+      )}
     </>
   );
 };
@@ -72,13 +71,34 @@ const boxNodeTraversal = (node: TreeNode<string>): JSX.Element[] => {
 };
 
 export const GridWrapper = () => {
-  const nodes = boxNodeTraversal(node);
+  const [nodes, setNodes] = useState<JSX.Element[]>([]);
+  const [expression, setExpression] = useState<string>("");
+  const [zoom, setZoom] = useState<number>()
 
   return (
     <FixedWrapper>
+      <input onChange={(e) => setExpression(e.target.value)} />
+      <button
+        onClick={() => {
+          const exp = new RegExp(/(\(|\))/g);
+          const parenthesis = expression.match(exp)
+  
+          if (expression.length >= 3 || (parenthesis != null && parenthesis.length % 2 == 0)) {
+            const elements = expression.replace(exp, "");
+            setZoom(elements.length <= 3 ? 55 : (elements.length * 100) / 55);
+            const node = AlgorithmsController.gridGeneration(
+              expression,
+              elements.length
+            );
+            setNodes(boxNodeTraversal(node));
+          }
+        }}
+      >
+        Dibujar
+      </button>
       <Center>
         <Canvas>
-          <PerspectiveCamera makeDefault position={[0, 0, 100]} />
+          <PerspectiveCamera makeDefault position={[0, 0, zoom!]} />
           {nodes}
         </Canvas>
       </Center>

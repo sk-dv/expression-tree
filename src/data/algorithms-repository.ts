@@ -7,8 +7,7 @@ export class AlgorithmsRepository {
      * @param tree node 
      * @returns generic sequence building by an in order walk
      */
-    static inOrderWalk = <T>(node: TreeNode<T>): TreeNode<T> => {
-        const leftBoundary = -50;
+    static inOrderWalk = <T>(node: TreeNode<T>, leftBoundary: number): TreeNode<T> => {
         const topBoundary = 10;
 
         const spacedSize = 2.25
