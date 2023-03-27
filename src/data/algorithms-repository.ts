@@ -2,15 +2,13 @@ import { TreeNode } from "../models/tree-node";
 
 export class AlgorithmsRepository {
 
-
     /**
      * @param tree node 
      * @returns generic sequence building by an in order walk
      */
     static inOrderWalk = <T>(node: TreeNode<T>, leftBoundary: number): TreeNode<T> => {
         const topBoundary = 10;
-
-        const spacedSize = 2.25
+        const spacedSize = 3
 
         const updatePosition = <T>(root: TreeNode<T>, node: TreeNode<T>): TreeNode<T> => {
             const distance = AlgorithmsRepository.findDistance(root, node.column!.toString())

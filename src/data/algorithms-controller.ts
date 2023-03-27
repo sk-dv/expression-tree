@@ -3,7 +3,7 @@ import { AlgorithmsRepository } from "./algorithms-repository";
 
 export class AlgorithmsController {
     static gridGeneration = (expression: string, elements: number): TreeNode<string> => {
-        const mediumLength = (elements * 2.25) / 2;
+        const mediumLength = (elements * 3.25) / 2;
 
         const leftBoundary = -mediumLength;
 
