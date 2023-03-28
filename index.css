@@ -2,11 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: Raleway;
-  src: url(assets/Raleway/Raleway-VariableFont_wght.ttf);
-}
-
 html, body, #root {
   margin: 0;
   width: 100%;
