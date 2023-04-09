@@ -13,25 +13,23 @@ export class AlgorithmsRepository {
     })
   }
 
-  private updatingPositionTraversal = <T>(root: TreeNode<T> | undefined): void => {
-    if (root == undefined) return;
+  private updatingPositionTraversal = <T>(root: TreeNode<T>, node: TreeNode<T>): void => {
+    if (node == undefined) return;
 
-    if (root.left != undefined) root.left = this.updatePosition(root, root.left)
-    this.updatingPositionTraversal(root.left)
+    if (node.left != undefined) node.left = this.updatePosition(root, node.left)
+    this.updatingPositionTraversal(root, node.left!)
 
-    if (root.right != undefined) root.right = this.updatePosition(root, root.right)
-    this.updatingPositionTraversal(root.right)
+    if (node.right != undefined) node.right = this.updatePosition(root, node.right)
+    this.updatingPositionTraversal(root, node.right!)
   };
 
   /**
    * @param tree node 
    * @returns generic sequence building by an in order walk
    */
-  inOrderPositionUpdating = <T>(node: TreeNode<T>): TreeNode<T> => {
-    this.updatingPositionTraversal(node)
-    node = this.updatePosition(node, node)
-
-    return node
+  inOrderPositionUpdating = <T>(root: TreeNode<T>): TreeNode<T> => {
+    this.updatingPositionTraversal(root, root)
+    return this.updatePosition(root, root)
   }
 
   /**
@@ -128,11 +126,27 @@ export class AlgorithmsRepository {
     return distance;
   }
 
-  inOrderTraversal = (root: TreeNode<string>, callback: (current: TreeNode<string>) => void) => {
+  inOrderTraversal = (root: TreeNode<string>, callback: TraversalCallback) => {
     if (root == undefined) return;
     this.inOrderTraversal(root.left!, callback);
     callback(root);
     this.inOrderTraversal(root.right!, callback);
   };
+
+  preOrderTraversal = (root: TreeNode<string>, callback: TraversalCallback) => {
+    if (root == undefined) return;
+    callback(root);
+    this.preOrderTraversal(root.left!, callback);
+    this.preOrderTraversal(root.right!, callback);
+  };
+
+  postOrderTraversal = (root: TreeNode<string>, callback: TraversalCallback) => {
+    if (root == undefined) return;
+    this.postOrderTraversal(root.left!, callback);
+    this.postOrderTraversal(root.right!, callback);
+    callback(root);
+  };
 }
+
+type TraversalCallback = (current: TreeNode<string>) => void
 

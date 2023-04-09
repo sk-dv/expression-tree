@@ -1,4 +1,5 @@
 import { BoxNode } from "../components/BoxNode";
+import { Traversal } from "../components/GridWrapper";
 import { TreeNode } from "../models/tree-node";
 import { AlgorithmsRepository } from "./algorithms-repository";
 
@@ -24,18 +25,32 @@ export class AlgorithmsController {
     return zoom < zoomDefault ? zoomDefault : zoom;
   };
 
-  drawTree = (): { zoom: number, elements: JSX.Element[] } => {
+  drawTree = (): { zoom: number, elements: JSX.Element[], traversal: Traversal | null } => {
     const parenthesesValidation = this.parenthesesMatch != null && this.parenthesesMatch.length % 2 == 0
+
     if (this.rawExpression.length >= 3 || parenthesesValidation) {
       const node = this.gridGeneration();
-      return { zoom: this.canvasZoom(), elements: this.drawBoxNodes(node, BoxNode) }
+      const traversal = this.traversals(node)
+      return { zoom: this.canvasZoom(), elements: this.drawBoxNodes(node, BoxNode), traversal }
     }
 
-    return { zoom: 0, elements: [] }
+    return { zoom: 0, elements: [], traversal: null }
+  }
+
+  private traversals = (node: TreeNode<string>): Traversal => {
+    const preOrder: string[] = []
+    const inOrder: string[] = []
+    const postOrder: string[] = []
+
+    this.repository.preOrderTraversal(node, (current) => preOrder.push(current.value!))
+    this.repository.inOrderTraversal(node, (current) => inOrder.push(current.value!))
+    this.repository.postOrderTraversal(node, (current) => postOrder.push(current.value!))
+
+    return { preOrder, inOrder, postOrder }
   }
 
   private drawBoxNodes = (
-    root: TreeNode<string>, 
+    root: TreeNode<string>,
     callback: (current: TreeNode<string>) => JSX.Element
   ): JSX.Element[] => {
     const sequence: TreeNode<string>[] = [];
